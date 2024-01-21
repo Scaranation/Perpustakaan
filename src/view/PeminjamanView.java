@@ -1,7 +1,9 @@
 package view;
 
+import controller.PeminjamanController;
 import controller.PerpustakaanController;
 import entity.BukuEntity;
+import entity.PeminjamanEntity;
 
 import java.sql.SQLOutput;
 import java.util.Scanner;
@@ -9,6 +11,8 @@ import java.util.Scanner;
 public class PeminjamanView {
     Scanner input = new Scanner(System.in);
     PerpustakaanController objPerpustakaan = new PerpustakaanController();
+    PeminjamanController objPeminjam = new PeminjamanController();
+
 
     public void peminjamanBuku() {
         try{
@@ -64,6 +68,17 @@ public class PeminjamanView {
             objPerpustakaan.tambahBuku(new BukuEntity(judul,pengarang,penerbit,halaman,stok,harga));
         }catch (Exception e){
             input.nextLine();
+        }
+    }
+    public void viewDataPeminjam(){
+        for (PeminjamanEntity peminjaman: objPeminjam.allArrayPeminjaman()){
+            System.out.println("Nama Peminjam : "+peminjaman.getNamaPeminjam());
+            System.out.println("Judul Buku : "+peminjaman.getJudulBuku());
+            System.out.println("Pengarang : "+peminjaman.getPengarang());
+            System.out.println("Penerbit : "+peminjaman.getPenerbit());
+            System.out.println("Jumlah Halaman : "+peminjaman.getJumlahHalaman());
+            System.out.println("Stok : "+peminjaman.getStok());
+            System.out.println("Harga : "+peminjaman.getHarga());
         }
     }
     public void dataBuku(){

@@ -34,7 +34,6 @@ public class PerpustakaanController {
     }
     public void tambahBuku(BukuEntity buku){
         perpustakaanModel.tambahBuku(buku);
-
     }
     public void updateStokBuku(String judul, int stok) {
         perpustakaanModel.updateStokBuku(judul, stok);

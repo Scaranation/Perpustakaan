@@ -18,11 +18,4 @@ public class PengunjungEntity extends Orang {
         this.nama = username;
     }
 
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
 }

@@ -22,6 +22,13 @@ public class PeminjamanModel {
         arrayPeminjaman.add(peminjaman);
         commitData();
     }
+    public void viewDataPeminjam(String peminjam) {
+        for (PeminjamanEntity peminjaman : arrayPeminjaman) {
+            if (peminjaman.getPeminjam().equals(peminjam)) {
+                return peminjaman;
+            }
+        }
+    }
     public void loadData() {
         arrayPeminjaman = modelGSONPeminjaman.readFromFile(new TypeToken<ArrayList<PeminjamanEntity>>(){}.getType());
     }

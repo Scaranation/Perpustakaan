@@ -1,6 +1,7 @@
 package view;
 
 import controller.AdminController;
+import controller.PeminjamanController;
 import controller.PerpustakaanController;
 import entity.BukuEntity;
 import entity.PeminjamanEntity;
@@ -64,11 +65,32 @@ public class Menu {
                 case "2" -> peminjamanView.tambahBuku();
                 case "3" -> peminjamanView.hapusBuku();
                 case "4" -> peminjamanView.editBuku();
-                case "5" -> peminjamanView.peminjamanBuku();
+                case "5" -> peminjamanList();
                 case "6" -> System.out.println("Terima kasih");
                 default -> System.out.println("Menu Tidak Ada");
             }
         }while (!pilih.equals("6"));
+    }
+    public void peminjamanList(){
+        String pilih;
+        do {
+            System.out.println("""
+                    ====================================
+                              List Peminjaman
+                    ====================================
+                    1. Tambah Peminjam
+                    2. List Data Peminjam
+                    3. Exit
+                    ====================================
+                    """);
+            System.out.println("Pilih Menu : "); pilih = input.nextLine();
+            switch (pilih){
+                case "1" -> peminjamanView.peminjamanBuku();
+                case "2" -> PeminjamanController.viewDataPeminjam();
+                case "3" -> System.out.println("Terima kasih");
+                default -> System.out.println("Menu Tidak Ada");
+            }
+        }while (!pilih.equals("2"));
     }
     public void menuPengunjung(){
         String pilih;
