@@ -12,7 +12,7 @@ public class AdminModel {
     private ArrayList<AdminEntity> listAdmin;
     public AdminModel() {
         arrayAdmin = new ArrayList<>();
-        modelGSONAdmin = new GsonModel<>("src//database//admin.json");
+        modelGSONAdmin = new GsonModel<>("src/database/admin.json");
         loadData();
     }
     public  void dataAdmin(AdminEntity adminEntity){

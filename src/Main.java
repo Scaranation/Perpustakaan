@@ -1,14 +1,17 @@
 import controller.AdminController;
 import controller.LoginController;
+import view.AdminView;
+import view.PengunjungView;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        AdminController adminController = new AdminController();
-        Menu menu = new Menu();
+        LoginController loginController = new LoginController();
+        PengunjungView pengunjungView = new PengunjungView();
         String pilih;
         do{
             System.out.println("""
@@ -29,9 +32,9 @@ public class Main {
                     String username = input.nextLine();
                     System.out.println("Masukkan Password :");
                     String password = input.nextLine();
-                    LoginController.loginAdmin(username, password);
+                    loginController.loginAdmin(username, password);
                 }
-                case "2" -> menu.menuPengunjung();
+                case "2" -> pengunjungView.menuPengunjung();
                 case "3" -> System.out.println("Terima kasih");
                 default -> System.out.println("Menu Tidak Ada");
             }

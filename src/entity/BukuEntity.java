@@ -9,7 +9,7 @@ public class BukuEntity {
     private String  rak;
     private int harga;
 
-    public BukuEntity(String judul, String pengarang, String penerbit, int jumlahHalaman, int stok, int harga) {
+    public BukuEntity(String judul, String pengarang, String penerbit, int jumlahHalaman, int stok, int harga, String rak) {
         this.judul = judul;
         this.pengarang = pengarang;
         this.penerbit = penerbit;

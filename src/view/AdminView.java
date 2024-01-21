@@ -2,6 +2,7 @@ package view;
 
 import controller.PerpustakaanController;
 import entity.BukuEntity;
+import model.PerpustakaanModel;
 
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class AdminView {
     Scanner input = new Scanner(System.in);
     PeminjamanView peminjamanView = new PeminjamanView();
     PerpustakaanController objPerpustakaan = new PerpustakaanController();
+    PerpustakaanModel objPerpustakaanModel = new PerpustakaanModel();
     public void menuAdmin(){
         String pilih;
         do {
@@ -24,13 +26,13 @@ public class AdminView {
                     6. Exit
                     ====================================
                     """);
-            System.out.println("Pilih Menu : "); pilih = input.nextLine();
+            System.out.print("Pilih Menu : "); pilih = input.nextLine();
             switch (pilih){
                 case "1" -> dataBuku();
                 case "2" -> tambahBuku();
                 case "3" -> hapusBuku();
                 case "4" -> editBuku();
-                case "5" -> peminjamanView.peminjamanBuku();
+                case "5" -> peminjamanView.pinjamBukuView();
                 case "6" -> System.out.println("Terima kasih");
                 default -> System.out.println("Menu Tidak Ada");
             }
@@ -38,74 +40,81 @@ public class AdminView {
     }
     public void tambahBuku(){
         try {
-            input.nextLine();
-            System.out.println("Masukkan ID Rak : ");
+            System.out.print("Masukkan ID Rak : ");
             String rak= input.nextLine();
-            System.out.println("Masukkan Judul Buku : ");
+            System.out.print("Masukkan Judul Buku : ");
             String judul = input.nextLine();
-            System.out.println("Masukkan Pengarang : ");
+            System.out.print("Masukkan Pengarang : ");
             String pengarang = input.nextLine();
-            System.out.println("Masukkan Penerbit : ");
+            System.out.print("Masukkan Penerbit : ");
             String penerbit = input.nextLine();
-            System.out.println("Masukkan Jumlah Halaman :");
+            System.out.print("Masukkan Jumlah Halaman :");
             int halaman = input.nextInt();
-            System.out.println("Masukkan Stok Buku : ");
+            System.out.print("Masukkan Stok Buku : ");
             int stok = input.nextInt();
-            System.out.println("Masukkan Harga : ");
+            System.out.print("Masukkan Harga : ");
             int harga = input.nextInt();
-            objPerpustakaan.tambahBuku(new BukuEntity(judul,pengarang,penerbit,halaman,stok,harga));
+            input.nextLine();
+            objPerpustakaan.tambahBuku(new BukuEntity(judul,pengarang,penerbit,halaman,stok,harga,rak));
         }catch (Exception e){
             input.nextLine();
         }
     }
     public void dataBuku(){
-        for (BukuEntity buku : objPerpustakaan.allArrayBuku()){
-            if (buku != null){
-                System.out.println("Judul : "+buku.getJudul());
-                System.out.println("Pengarang : "+buku.getPengarang());
-                System.out.println("Penerbit : "+buku.getPenerbit());
-                System.out.println("Jumlah Halaman: "+buku.getJumlahHalaman());
-                System.out.println("Stok :"+buku.getStok());
-                System.out.println("Harga :"+buku.getHarga());
+        if (objPerpustakaanModel.allArrayBuku() != null){
+            for (BukuEntity buku : objPerpustakaanModel.allArrayBuku()){
+                System.out.println("============================");
                 System.out.println("Rak :"+buku.getRak());
-            }else {
-                System.out.println("Buku Tidak Ada");
+                System.out.println("Judul         : "+buku.getJudul());
+                System.out.println("Pengarang     : "+buku.getPengarang());
+                System.out.println("Penerbit      : "+buku.getPenerbit());
+                System.out.println("Jumlah Halaman: "+buku.getJumlahHalaman());
+                System.out.println("Stok Buku     : "+buku.getStok());
+                System.out.println("Harga Buku    : "+buku.getHarga());
+                System.out.println("\n============================");
             }
+        }else {
+            System.out.println("Buku Tidak Ada");
         }
     }
     public void hapusBuku(){
         try {
-            System.out.println("Masukkan Judul Buku : ");
+            if (objPerpustakaan.allArrayBuku().size() == 0){
+                System.out.println("Buku Tidak Ada");
+                return;
+            }
+            System.out.print("Masukkan judul Buku yang ingin dihapus : ");
             String judul = input.nextLine();
             objPerpustakaan.hapusBuku(judul);
+            System.out.println();
         }catch (Exception e){
             input.nextLine();
         }
     }
     public void editBuku(){
         try {
-            System.out.println("Masukkan Judul Buku yg ingin diedit :");
+            System.out.print("Masukkan judul Buku yang ingin diedit :");
             String judul = input.nextLine();
             if (objPerpustakaan.cariBuku(judul) == null){
                 System.out.println("Buku Tidak Ada");
                 return;
             }else {
-                System.out.println("Masukkan Judul Baru :");
+                System.out.print("Masukkan Judul Baru : ");
                 String judulBaru = input.nextLine();
-                System.out.println("Masukkan Pengarang Baru :");
+                System.out.print("Masukkan Pengarang Baru : ");
                 String pengarangBaru = input.nextLine();
-                System.out.println("Masukkan Penerbit Baru :");
+                System.out.print("Masukkan Penerbit Baru : ");
                 String penerbitBaru = input.nextLine();
-                System.out.println("Masukkan Jumlah Halaman Baru :");
+                System.out.print("Masukkan Jumlah Halaman Baru : ");
                 int jumlahHalamanBaru = input.nextInt();
-                System.out.println("Masukkan Stok Baru :");
+                System.out.print("Masukkan Stok Baru : ");
                 int stokBaru = input.nextInt();
-                System.out.println("Masukkan Harga Baru :");
+                System.out.print("Masukkan Harga Baru : ");
                 int hargaBaru = input.nextInt();
                 input.nextLine();
-                System.out.println("Masukkan Rak Baru :");
+                System.out.print("Masukkan Rak Baru : ");
                 String rakBaru = input.nextLine();
-                objPerpustakaan.editBuku(judul, judulBaru, pengarangBaru, penerbitBaru, jumlahHalamanBaru, stokBaru, hargaBaru, rakBaru);
+                objPerpustakaanModel.editBuku(judul, judulBaru, pengarangBaru, penerbitBaru, jumlahHalamanBaru, stokBaru, hargaBaru, rakBaru);
             }
         }catch (Exception e){
             input.nextLine();

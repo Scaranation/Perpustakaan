@@ -2,7 +2,9 @@ package model;
 
 import com.google.gson.reflect.TypeToken;
 import entity.PeminjamanEntity;
+import entity.PengunjungEntity;
 import modelgson.GsonModel;
+import view.PeminjamanView;
 
 import java.util.ArrayList;
 
@@ -11,22 +13,22 @@ public class PeminjamanModel {
     GsonModel<PeminjamanEntity> modelGSONPeminjaman;
     public PeminjamanModel() {
         arrayPeminjaman = new ArrayList<>();
-        modelGSONPeminjaman = new GsonModel<>("src//database//peminjaman.json");
+        modelGSONPeminjaman = new GsonModel<>("src/database/datapeminjaman.json");
         loadData();
     }
-
     public ArrayList<PeminjamanEntity> allArrayPeminjaman() {
+        loadData();
         return arrayPeminjaman;
     }
     public void tambahPeminjaman(PeminjamanEntity peminjaman) {
         arrayPeminjaman.add(peminjaman);
         commitData();
     }
-    public void viewDataPeminjam(String peminjam) {
+
+    public void viewDataPeminjam() {
+        loadData();
         for (PeminjamanEntity peminjaman : arrayPeminjaman) {
-            if (peminjaman.getPeminjam().equals(peminjam)) {
-                return peminjaman;
-            }
+            System.out.println(peminjaman);
         }
     }
     public void loadData() {

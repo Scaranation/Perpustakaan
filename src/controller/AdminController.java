@@ -5,11 +5,9 @@ import model.AdminModel;
 
 public class AdminController {
     AdminModel adminModel;
-    Menu menu;
 
     public AdminController() {
         adminModel = new AdminModel();
-        menu = new Menu();
     }
 
 

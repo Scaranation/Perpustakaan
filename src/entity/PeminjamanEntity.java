@@ -3,27 +3,18 @@ package entity;
 import utils.DateString;
 
 public class PeminjamanEntity {
-    private PengunjungEntity pengunjungEntity;
+    public PengunjungEntity pengunjungEntity;
     private BukuEntity bukuEntity;
     private String tglPinjam;
-    private String lamaPeminjaman;
-    private String tglKembali;
-
-    public PeminjamanEntity(PengunjungEntity pengunjungEntity, BukuEntity bukuEntity, String lamaPeminjaman) {
+    private int lamaPeminjaman;
+    private int totalHarga;
+    public PeminjamanEntity(PengunjungEntity pengunjungEntity, BukuEntity bukuEntity,int lamaPeminjaman,int totalHarga) {
         this.pengunjungEntity = pengunjungEntity;
         this.bukuEntity = bukuEntity;
         this.tglPinjam = DateString.now();
         this.lamaPeminjaman = lamaPeminjaman;
+        this.totalHarga = totalHarga;
     }
-
-    public String getTglKembali() {
-        return tglKembali;
-    }
-
-    public void setTglKembali(String tglKembali) {
-        this.tglKembali = tglKembali;
-    }
-
     public PengunjungEntity getPengunjungEntity() {
         return pengunjungEntity;
     }
@@ -48,14 +39,19 @@ public class PeminjamanEntity {
         this.tglPinjam = tglPinjam;
     }
 
-    public String getLamaPeminjaman() {
+    public int getLamaPeminjaman() {
         return lamaPeminjaman;
     }
 
-    public void setLamaPeminjaman(String lamaPeminjaman) {
+    public void setLamaPeminjaman(int lamaPeminjaman) {
         this.lamaPeminjaman = lamaPeminjaman;
     }
+
     public int getTotalHarga() {
-        return this.bukuEntity.getHarga() * Integer.parseInt(this.lamaPeminjaman);
+        return totalHarga;
+    }
+
+    public void setTotalHarga(int totalHarga) {
+        this.totalHarga = totalHarga;
     }
 }
