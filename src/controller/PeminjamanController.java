@@ -16,4 +16,11 @@ public class PeminjamanController {
     public void tambahPeminjaman(PeminjamanEntity peminjaman) {
         peminjamanModel.tambahPeminjaman(peminjaman);
     }
+    public void viewDataPeminjam(String judul) {
+        for (PeminjamanEntity peminjaman : peminjamanModel.allArrayPeminjaman()) {
+            if (peminjaman.getPeminjam().equals(peminjam)) {
+                return peminjaman;
+            }
+        }
+    }
 }

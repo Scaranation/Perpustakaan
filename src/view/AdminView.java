@@ -1,52 +1,40 @@
 package view;
 
-import controller.PeminjamanController;
 import controller.PerpustakaanController;
 import entity.BukuEntity;
-import entity.PeminjamanEntity;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
-public class PeminjamanView {
+public class AdminView {
     Scanner input = new Scanner(System.in);
+    PeminjamanView peminjamanView = new PeminjamanView();
     PerpustakaanController objPerpustakaan = new PerpustakaanController();
-    PeminjamanController objPeminjam = new PeminjamanController();
-
-
-    public void peminjamanBuku() {
-        try{
-            System.out.println("Masukkan Nama Peminjam : ");
-            String nama = input.nextLine();
-            for (BukuEntity buku : objPerpustakaan.allArrayBuku()){
-                if (buku != null){
-                    System.out.println("Judul : "+buku.getJudul());
-                    System.out.println("Stok : "+buku.getStok());
-                    System.out.println("Harga : "+buku.getHarga());
-                }
+    public void menuAdmin(){
+        String pilih;
+        do {
+            System.out.println("""
+                    ====================================
+                                 Panel Admin
+                    ====================================
+                    1. List Data Buku
+                    2. Tambah Buku
+                    3. Hapus Data Buku
+                    4. Edit Data Buku
+                    5. Peminjaman Buku
+                    6. Exit
+                    ====================================
+                    """);
+            System.out.println("Pilih Menu : "); pilih = input.nextLine();
+            switch (pilih){
+                case "1" -> dataBuku();
+                case "2" -> tambahBuku();
+                case "3" -> hapusBuku();
+                case "4" -> editBuku();
+                case "5" -> peminjamanView.peminjamanBuku();
+                case "6" -> System.out.println("Terima kasih");
+                default -> System.out.println("Menu Tidak Ada");
             }
-            System.out.println("Masukkan Judul Buku Peminjaman: ");
-            String judul = input.nextLine();
-            if (objPerpustakaan.cariBuku(judul) != null){
-                if (objPerpustakaan.cariBuku(judul).getStok() > 0){
-                    objPerpustakaan.CariBuku(judul);
-                    objPerpustakaan.updateStokBuku(judul, objPerpustakaan.cariBuku(judul).getStok()-1);
-                    System.out.println("Detail Peminjaman");
-                    System.out.println("Judul : "+objPerpustakaan.cariBuku(judul).getJudul());
-                    System.out.println("Pengarang : "+objPerpustakaan.cariBuku(judul).getPengarang());
-                    System.out.println("Penerbit : "+objPerpustakaan.cariBuku(judul).getPenerbit());
-                    System.out.println("Jumlah Halaman : "+objPerpustakaan.cariBuku(judul).getJumlahHalaman());
-                    System.out.println("Harga : "+objPerpustakaan.cariBuku(judul).getHarga());
-                    System.out.println("Peminjaman Berhasil");
-                }else{
-                    System.out.println("Stok buku habis");
-                }
-            }else{
-                System.out.println("Buku Tidak Ditemukan");
-            }
-        }catch (Exception e){
-            input.nextLine();
-        }
+        }while (!pilih.equals("6"));
     }
     public void tambahBuku(){
         try {
@@ -68,17 +56,6 @@ public class PeminjamanView {
             objPerpustakaan.tambahBuku(new BukuEntity(judul,pengarang,penerbit,halaman,stok,harga));
         }catch (Exception e){
             input.nextLine();
-        }
-    }
-    public void viewDataPeminjam(){
-        for (PeminjamanEntity peminjaman: objPeminjam.allArrayPeminjaman()){
-            System.out.println("Nama Peminjam : "+peminjaman.getNamaPeminjam());
-            System.out.println("Judul Buku : "+peminjaman.getJudulBuku());
-            System.out.println("Pengarang : "+peminjaman.getPengarang());
-            System.out.println("Penerbit : "+peminjaman.getPenerbit());
-            System.out.println("Jumlah Halaman : "+peminjaman.getJumlahHalaman());
-            System.out.println("Stok : "+peminjaman.getStok());
-            System.out.println("Harga : "+peminjaman.getHarga());
         }
     }
     public void dataBuku(){

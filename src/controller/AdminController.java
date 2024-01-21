@@ -1,12 +1,7 @@
 package controller;
 
-import com.google.gson.reflect.TypeToken;
 import entity.AdminEntity;
 import model.AdminModel;
-import modelgson.GsonModel;
-import view.Menu;
-
-import java.util.ArrayList;
 
 public class AdminController {
     AdminModel adminModel;
